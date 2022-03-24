@@ -23,12 +23,12 @@ void printlist(NODE *head, int counter){
 }
 
 int returnNodeNum(int n){
-    int flag = 0;
+    int flag1 = 0;
     while(n > 2){
         n = (n/2)+1;
-        flag++;
+        flag1++;
     }
-    return flag;
+    return flag1;
 }
 
 NODE *create_new_node(int value){
