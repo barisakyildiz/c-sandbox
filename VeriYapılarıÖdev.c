@@ -22,6 +22,15 @@ void printlist(NODE *head, int counter){
     printf("\n");
 }
 
+int returnNodeNum(int n){
+    int flag = 0;
+    while(n > 2){
+        n = (n/2)+1;
+        flag++;
+    }
+    return flag;
+}
+
 NODE *create_new_node(int value){
     NODE *result = malloc(sizeof(NODE));
     result -> value = value;
@@ -37,10 +46,12 @@ NODE *insert_at_head(NODE *head, NODE *node_to_insert){
 int main(){
     NODE *head = NULL;
     NODE *tmp;
-    int n;
+    int n, nodeSet;
 
     printf("Please enter the number of 'NODES': \n");
     scanf("%d", &n);
+    nodeSet = returnNodeNum(n) + 1;
+    printf("nodeSet: %d\n", nodeSet);
 
     for(int i=n; i>0; i--){
         tmp = create_new_node(i);
