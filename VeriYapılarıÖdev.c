@@ -24,8 +24,8 @@ void printlist(NODE *head, int counter){
 
 int returnNodeNum(int n){
     int flag1 = 0;
-    while(n > 2){
-        n = (n/2)+1;
+    while(n > 1){
+        n = (n+1)/2;
         flag1++;
     }
     return flag1;
@@ -46,19 +46,26 @@ NODE *insert_at_head(NODE *head, NODE *node_to_insert){
 int main(){
     NODE *head = NULL;
     NODE *tmp;
-    int n, nodeSet;
+    int n, nodeSet, temp;
 
     printf("Please enter the number of 'NODES': \n");
     scanf("%d", &n);
-    nodeSet = returnNodeNum(n) + 1;
+    nodeSet = returnNodeNum(n) + 2;
     printf("nodeSet: %d\n", nodeSet);
+    temp = n;
 
-    for(int i=n; i>0; i--){
-        tmp = create_new_node(i);
-        head = insert_at_head(head, tmp);
+    for(int j = 0; j<nodeSet; j++){
+        for(int i=temp; i>0; i--){
+            tmp = create_new_node(i);
+            head = insert_at_head(head, tmp);
+        }
+        if(temp%2 == 0){
+            temp = temp / 2;
+        }else{
+            temp = (temp+1)/2;
+        }
+        printlist(head, n);
     }
 
-    printlist(head, n);
-    
     return 0;
 }
