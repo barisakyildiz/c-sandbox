@@ -65,6 +65,7 @@ int main(){
             temp = (temp+1)/2;
         }
         printlist(head, n);
+        head = NULL;
     }
 
     return 0;

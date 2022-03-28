@@ -17,13 +17,23 @@ tree createTree(int data){
 }
 
 void pretraverse(tree t){
-    if (t==NULL) return;
+    if (t == NULL) return;
     visit(t);
     pretraverse(t -> left);
     pretraverse(t -> right);
 }
 
-
+tree insert(tree node, int data){
+    if(node == NULL){
+        return createTree(data);
+    }
+    if(data < node -> data){
+        node -> left = insert(node -> left, data);
+    }else if(data > node -> data){
+        node -> right = insert(node -> right, data);
+    }
+    return node;
+}
 
 int main(){
 
