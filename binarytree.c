@@ -16,6 +16,14 @@ tree createTree(int data){
     return T;
 }
 
+void pretraverse(tree t){
+    if (t==NULL) return;
+    visit(t);
+    pretraverse(t -> left);
+    pretraverse(t -> right);
+}
+
+
 
 int main(){
 
