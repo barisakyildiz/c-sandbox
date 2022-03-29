@@ -13,7 +13,7 @@ void printlist(NODE *head, int counter){
     printf("Linked List:\n");
     while(temporary != NULL){
         printf("%d ", temporary -> value);
-        if(counter-1 != 0){
+        if(counter != 0){
             printf("- ");
             counter--;
         }
@@ -54,18 +54,29 @@ int main(){
     printf("nodeSet: %d\n", nodeSet);
     temp = n;
     temp1 = n;
+    NODE *linksArray[n+1];
+    NODE *linksArrayTemp[n+1];
 
     for(int j = 0; j<nodeSet-1; j++){
         for(int i=temp; i>0; i--){
             tmp = create_new_node(i);
             head = insert_at_head(head, tmp);
+            linksArray[i] = head;
         }
         if(temp%2 == 0){
             temp = temp / 2;
         }else{
-            temp = (temp+1)/2;
+            temp = (temp+1) / 2;
+        }
+        tmp = create_new_node((-404)); //First node does not have any value, so i set them to '-404'.
+        head = insert_at_head(head, tmp);
+        linksArray[0] = head;
+        for(int i = 0; i<=n; i++){
+            printf("%p\n", linksArray[i]);
         }
         printlist(head, temp1);
+        printf("1st Node value %d\n", linksArray[0] -> value);
+        printf("---------------------------------------------\n\n");
         temp1 = temp;
         head = NULL;
     }
