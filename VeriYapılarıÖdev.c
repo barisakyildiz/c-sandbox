@@ -59,9 +59,13 @@ int main(){
 
     for(int j = 0; j<nodeSet-1; j++){
         for(int i=temp; i>0; i--){
-            tmp = create_new_node(i);
-            head = insert_at_head(head, tmp);
-            linksArray[i] = head;
+            if(j == 0){
+                tmp = create_new_node(i);
+                head = insert_at_head(head, tmp);
+                linksArray[i] = head;
+            }else{
+                
+            }
         }
         if(temp%2 == 0){
             temp = temp / 2;
