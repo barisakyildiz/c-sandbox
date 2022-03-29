@@ -46,15 +46,16 @@ NODE *insert_at_head(NODE *head, NODE *node_to_insert){
 int main(){
     NODE *head = NULL;
     NODE *tmp;
-    int n, nodeSet, temp;
+    int n, nodeSet, temp, temp1;
 
     printf("Please enter the number of 'NODES': \n");
     scanf("%d", &n);
     nodeSet = returnNodeNum(n) + 2;
     printf("nodeSet: %d\n", nodeSet);
     temp = n;
+    temp1 = n;
 
-    for(int j = 0; j<nodeSet; j++){
+    for(int j = 0; j<nodeSet-1; j++){
         for(int i=temp; i>0; i--){
             tmp = create_new_node(i);
             head = insert_at_head(head, tmp);
@@ -64,9 +65,11 @@ int main(){
         }else{
             temp = (temp+1)/2;
         }
-        printlist(head, n);
+        printlist(head, temp1);
+        temp1 = temp;
         head = NULL;
     }
+    
 
     return 0;
 }
