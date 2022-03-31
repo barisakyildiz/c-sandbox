@@ -1,29 +1,29 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct node *tree;
-typedef struct node{
-    int data;
-    tree left;
-    tree right;
-}node;
 
-tree createTree(int data){
-    tree T = (tree)malloc(sizeof(struct node));
+typedef struct{
+    int data;
+    int *left;
+    int *right;
+}tree;
+
+tree *createTree(int data){
+    tree *T = malloc(sizeof(tree));
     T -> data = data;
     T -> left = NULL;
     T -> right = NULL;
     return T;
 }
 
-void pretraverse(tree t){
+void pretraverse(tree *t){
     if (t == NULL) return;
-    visit(t);
+    //visit(t);
     pretraverse(t -> left);
     pretraverse(t -> right);
 }
 
-tree insert(tree node, int data){
+tree *insert(tree *node, int data){
     if(node == NULL){
         return createTree(data);
     }
@@ -37,7 +37,7 @@ tree insert(tree node, int data){
 
 int main(){
 
-    tree tree1;
+    tree *tree1;
 
     tree1 = createTree(5);
     
