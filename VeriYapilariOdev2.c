@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
+#include <math.h>
 
 typedef struct{
     int top, capacity;
@@ -9,7 +10,7 @@ typedef struct{
 
 stack *createStack(int);
 char convertToBinary(int);
-int countBit(int);
+int countTotalBit(int);
 int isFull(stack*);
 int isEmpty(stack*);
 void pushStack(stack* , char);
@@ -18,18 +19,27 @@ int popStack(stack*);
 int main(){
     
     stack *stackTmp = createStack(100);
-    int input;
+    int input, totalBits, digit;
+    char digitChar;
     printf("Please enter the number that is going to converted: ");
     scanf("%d", &input);
 
-    pushStack(stackTmp, 10);
-    pushStack(stackTmp, 20);
-    pushStack(stackTmp, 30);
+    totalBits = countTotalBit(input);
+    int totalbitsdivided = totalBits / 8;
+    if(totalBits == 8 || totalbitsdivided == 0){
+        totalBits = 8;
+    }else if(totalBits == 16 || totalbitsdivided == 1){
+        totalBits = 16;
+    }else if(totalBits == 24 || totalbitsdivided == 2){
+        totalBits = 24;
+    }else if(totalBits == 32 || totalbitsdivided == 3){
+        totalBits = 32;
+    } 
 
-    int a = popStack(stackTmp);
-
-    printf("%c popped from the stack \n", a);
-    printf("capacity: %d \n", stackTmp -> capacity);
+    for(int i = 0; i < totalBits; i++){
+        input, digit = convertToBinary(input);
+        pushStack(stackTmp, digitChar);
+    }
 
 
     return 0;
@@ -45,11 +55,12 @@ stack *createStack(int capacity){
 
 char convertToBinary(int input){
     int digit;
-    char digitChar; 
-    digit = input % 2;    
+    char digitChar[1]; 
+    digit = input % 2;
+    printf("%d ", digit);    
     input = input / 2;
-    digitChar = digit + '0';        
-    return digitChar, input;
+    sprintf(digitChar, "%d", digit);       
+    return input, digit;
 }
 
 int isFull(stack *stackTemp){
@@ -66,7 +77,7 @@ void pushStack(stack *stackTemp, char item){
         return;
     }else{
         stackTemp -> array[++stackTemp -> top] = item;
-        printf("%c pushed to the stack\n", item);
+        printf("%d pushed to the stack\n", item);
     }
 }
 
@@ -78,7 +89,7 @@ int popStack(stack *stackTemp){
     }
 }
 
-int countBit(int n){
+int countTotalBit(int n){
 	int count=0, i;
 	if(n==0) return 0;
 	for(i=0; i < 32; i++){	
