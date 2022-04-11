@@ -35,6 +35,29 @@ int get_parent(int A[], int index){
     }
 }
 
+void max_heapify(int A[], int index){
+    int lci = get_left_child(A, index);
+    int rci = get_right_child(A, index);
+    int largest = index;
+
+    if((lci <= heap_size) && (lci > 0)){
+        if(A[lci] > A[largest]){
+            largest = lci;
+        }
+    }
+
+    if((rci <= heap_size) && (rci > 0)){
+        if(A[rci] > A[largest]){
+            largest = rci;
+        }
+    }
+    
+    if(largest != index){
+        swap(&A[index], &A[largest]);
+        max_heapify(A, largest);
+    }
+}
+
 int main(){
 
 
