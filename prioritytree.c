@@ -58,6 +58,28 @@ void max_heapify(int A[], int index){
     }
 }
 
+void build_max_heap(int A[]){
+    for(int i = heap_size/2; i>=1; i--){
+        max_heapify(A, i);
+    }
+}
+
+int extract_max(int A[]){
+    int maxm = A[1];
+    A[1] = A[heap_size];
+    heap_size--;
+    max_heapify(A, 1);
+    return maxm;
+}
+
+void increase_key(int A[], int index, int key){
+    A[index] = key;
+    while((index > 1) && A[get_parent(A, index)] < A[index]){
+        swap(&A[index], &A[get_parent(A, index)]);
+        index = get_parent(A, index);
+    }
+}
+
 int main(){
 
 
