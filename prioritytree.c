@@ -80,6 +80,17 @@ void increase_key(int A[], int index, int key){
     }
 }
 
+void decrease_key(int A[], int index, int key){
+    A[index] = key;
+    max_heapify(A, index);
+}
+
+void insert(int A[], int key){
+    heap_size++;
+    A[heap_size] = -1 * INF;
+    increase_key(A, heap_size, key);
+}
+
 int main(){
 
 
