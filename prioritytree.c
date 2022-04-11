@@ -93,7 +93,11 @@ void insert(int A[], int key){
 
 int main(){
 
+    int A[tree_arraysize];
+    insert(A, 20);
+    insert(A, 15);
 
+    printf("%d\n", extract_max(A));
 
     return 0;
 }
