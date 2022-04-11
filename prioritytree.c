@@ -19,6 +19,22 @@ int get_right_child(int A[], int index){
     }
 }
 
+int get_left_child(int A[], int index){
+    if(((2*index) < tree_arraysize) && (index >= 1)){
+        return(2*index);
+    }else{
+        return -1;
+    }
+}
+
+int get_parent(int A[], int index){
+    if((index >1) && (index < tree_arraysize)){
+        return index / 2;
+    }else{
+        return -1;
+    }
+}
+
 int main(){
 
 
