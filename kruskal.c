@@ -38,5 +38,7 @@ int main(){
         edgeHead = init(edgeHead);
     }
 
+    
+
 }
 
