@@ -23,10 +23,7 @@ typedef struct stackNode STACKNODE;
 typedef struct graphNode GRAPHNODE;
 typedef struct graph GRAPH;
 
-GRAPH* allocateMaze(int rows, int cols){
-    GRAPH* maze = createGraph(rows*cols);
-    
-}
+
 
 GRAPHNODE* createGraphNode(int vertex){
     GRAPHNODE* newNode = (GRAPHNODE*)malloc(sizeof(GRAPHNODE));
@@ -44,6 +41,22 @@ GRAPH* createGraph(int nVertices){
         _graph -> adjlist[i] = NULL;
     }
     return _graph;
+}
+
+GRAPH* allocateMaze(int rows, int cols){
+    FILE* ptr;
+    char ch;
+    ptr = fopen(shortMaze, "r+");
+    if(NULL == ptr){
+        printf("Dosya Acilamadi\n");
+    }
+    while (!feof(ptr)){
+        ch = fgetc(ptr);
+        if(ch != '\n' || ch != '\0'){
+            
+        }
+    }
+    GRAPH* maze = createGraph(rows*cols);
 }
 
 void addGraphEdge(GRAPH* _graph, int source, int destination){
@@ -77,15 +90,38 @@ int popStack(STACKNODE *head){
     return pop;
 }
 
-int main(){
+int readFromFile(FILE* ptr){
+    char ch;
+    int rows = 0, columns = 0;
+    if (NULL == ptr) {
+        printf("Dosya Acilamadi \n");
+    }
+    printf("Dosyanin Icerigi\n");
+    while (!feof(ptr)) {
+        ch = fgetc(ptr);
+        if(ch == '\n'){
+            rows++;
+        }else if(ch != '\n' || ch != '\0'){
+            columns++;
+        }
+        printf("%c", ch);
+    }
+    printf("rows = %d\n", rows);
+    columns = (columns- 1) / rows;
+    printf("columns = %d\n", columns);
+    return rows, columns;
+}
 
+int main(){
+    
+    int rows, columns;
     STACKNODE *stackHead, *stackEnd;
     FILE* fp = fopen(shortMaze, "a+");
-    while(fp != NULL){
-        printf("Dosya Acildi\n");
+    rows, columns = readFromFile(fp);
+    fclose(fp);
 
-    }
-    printf("Dosya Acilamadi\n");
+
+
 
     return 0;
 }

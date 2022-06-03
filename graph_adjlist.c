@@ -43,8 +43,12 @@ void addEdge(GRAPH* _graph, int source, int destination){
 
 int main(){
 
-    GRAPH* _graph = createGraph(10);
-    addEdge(_graph, 5, 3);
+    GRAPH* _graph = createGraph(4);
+    addEdge(_graph, 0, 1);
+    addEdge(_graph, 0, 2);
+    addEdge(_graph, 1, 2);
+    addEdge(_graph, 1, 3);
+    printf("%d\n", (_graph -> adjlist[1]) -> vertex);
     printf("PROGRAM ENDED SUCCESSFULLY\n");
 
     return 0;
