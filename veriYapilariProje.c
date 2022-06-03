@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char shortMaze[] = "maze3.txt";
-char longMaze[] = "maze.txt";
+const char shortMaze[] = "maze3.txt";
+const char longMaze[] = "maze.txt"; //please enter the name of the text file that contains the maze
 
 struct graphNode{
     int vertex;
@@ -11,7 +11,7 @@ struct graphNode{
 
 struct graph{
     int nVertex;
-    struct node** adjlist;
+    struct graphNode** adjlist;
 };
 
 struct stackNode{
@@ -22,6 +22,11 @@ struct stackNode{
 typedef struct stackNode STACKNODE;
 typedef struct graphNode GRAPHNODE;
 typedef struct graph GRAPH;
+
+GRAPH* allocateMaze(int rows, int cols){
+    GRAPH* maze = createGraph(rows*cols);
+    
+}
 
 GRAPHNODE* createGraphNode(int vertex){
     GRAPHNODE* newNode = (GRAPHNODE*)malloc(sizeof(GRAPHNODE));
@@ -39,6 +44,15 @@ GRAPH* createGraph(int nVertices){
         _graph -> adjlist[i] = NULL;
     }
     return _graph;
+}
+
+void addGraphEdge(GRAPH* _graph, int source, int destination){
+    GRAPHNODE* newNode = createGraphNode(destination);
+    newNode -> next = _graph -> adjlist[source];
+    _graph -> adjlist[source] = newNode;
+    newNode = createGraphNode(source);
+    newNode -> next = _graph -> adjlist[destination];
+    _graph -> adjlist[destination] = newNode;
 }
 
 void stackinit(STACKNODE *head, STACKNODE *end){
@@ -69,6 +83,7 @@ int main(){
     FILE* fp = fopen(shortMaze, "a+");
     while(fp != NULL){
         printf("Dosya Acildi\n");
+
     }
     printf("Dosya Acilamadi\n");
 
