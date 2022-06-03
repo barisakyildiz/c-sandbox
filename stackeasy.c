@@ -1,12 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct{
+struct node{
     
     int val;
-    int *next;
+    struct node* next;
 
-}NODE;
+};
+
+typedef struct node NODE;
 
 
 void stackinit(NODE *head, NODE *end){
