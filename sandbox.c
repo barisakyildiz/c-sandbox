@@ -1,52 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-
-
+void degistir(int* ad){
+    ad[4] = 11;
+}
 
 int main(){
-
-    int x, y;
-    int returnedX;
-    x = 5; y = 10;
-
-    returnedX = miuv(x, y);
-    printf("%d\n", x);
-    printf("%d\n", returnedX);
-
-    /*int N;
-
-    printf("giriniz: ");
-    scanf("%d", &N);
-
-    int i, rakamlar[N][N][N][N];
-
-    char sjsj31[]= "sjsj31";
-    char sj[7] = {'s', 'j', 's', 'j', '3', '1', '\0'};
-    printf("%s\n", sjsj31);
-    printf("%s\n", sj);*/
-
-    /*while(i < N){
-        printf("%d. eleman gir: ", i);
-        scanf("%d", &rakamlar[i]);
-        i++;
-    }
-    i = 0;
-    while(i < N){
-        printf("%d ", rakamlar[i]);
-        i++;
-    }*/
-
-    /*for(i = 0; i < sizeof(rakamlar) / 4; i++){
-        rakamlar[i] = i;
-    }
-
-    for(i = 0; i < 10; i++){
-        printf("%d ", rakamlar[i]);
-    }*/
-
     
-
+    int* a = (int*)malloc(sizeof(int) * 5);
+    
+    for(int i = 0; i < 5; i++){
+        a[i] = i;
+    }
+    for(int i = 0; i < 5; i++){
+        printf("5. eleman %d\n", a[4]);
+    }
+    
+    degistir(a);
+    
+    for(int i = 0; i < 5; i++){
+        printf("5. eleman %d\n", a[4]);
+    }
+    
     return 0;
 }
