@@ -1,25 +1,47 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void degistir(int* ad){
-    ad[4] = 11;
+struct node{
+    
+    int val;
+    struct node* next;
+
+};
+
+typedef struct node NODE;
+
+
+void stackinit(NODE *head, NODE *end){
+    head -> next = end;
+    head -> val = 0;
+}
+
+void pushStack(NODE *head, int n){
+    NODE *current = (NODE*) malloc (sizeof(NODE));
+    current -> val = n;
+    current -> next = head -> next;
+    head -> next = current;
+}
+
+int popStack(NODE *head){
+    int pop;
+    NODE *current = (NODE*) malloc(sizeof(NODE));
+    current = head -> next;
+    head -> next = current -> next;
+    pop = current -> val;
+    free(current);
+    return pop;
 }
 
 int main(){
     
-    int* a = (int*)malloc(sizeof(int) * 5);
-    
-    for(int i = 0; i < 5; i++){
-        a[i] = i;
-    }
-    for(int i = 0; i < 5; i++){
-        printf("5. eleman %d\n", a[4]);
-    }
-    
-    degistir(a);
-    
-    for(int i = 0; i < 5; i++){
-        printf("5. eleman %d\n", a[4]);
+    NODE* stackHead, *stackEnd;
+    stackinit(stackHead, stackEnd);
+    int i = 0;
+
+    while(1){
+        pushStack(stackHead, 5);
+        i++;
     }
     
     return 0;
