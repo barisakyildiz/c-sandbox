@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <conio.h> //getch() fonksiyonu için kütüphane
+//#include <conio.h> //getch() fonksiyonu için kütüphane
 #include <unistd.h> //sleep() fonksiyonu Linux kütüphanesi
-#include <windows.h> //sleep() fonksiyonu Windows kütüphanesi
+//#include <windows.h> //sleep() fonksiyonu Windows kütüphanesi
 #include <time.h>
 
 const char shortMaze[] = "maze.txt"; //Lütfen Labirentin bulunduğu .txt dosyasının adını giriniz
+char dummy;
 
 struct stackNode{
     int row;
@@ -189,10 +190,11 @@ void putApples(char** mazeChar, int** maze, int rows, int cols){ //rastgele bir 
 }
 
 void returnWhenFound(int **maze, char** mazeChar, int **visited, int selectedRow, int selectedColumn, int rows, int cols, STACKNODE* head, STACKNODE* end, int endRow, int endColumn){
-    system("cls");                                                               //Oyunu başlatan ve sürdüren asıl fonksiyon, çözüldüğü anda returnler
+    system("cls");  
+    system("clear");                                                             //Oyunu başlatan ve sürdüren asıl fonksiyon, çözüldüğü anda returnler
     ROWCOLUMN* returnPopStack = (ROWCOLUMN*)malloc(sizeof(ROWCOLUMN));
     int points = 0, flag = 0;
-    float delay = 100;
+    float delay = 100000;
     while(!isStackEmpty(head, end)){
         if(selectedRow == endRow && selectedColumn == endColumn){
             printf("\n\nMAZE :");
@@ -209,6 +211,7 @@ void returnWhenFound(int **maze, char** mazeChar, int **visited, int selectedRow
         if(isValid(visited, maze, rows, cols, selectedRow + 1, selectedColumn)){
             usleep(delay);
             system("cls");
+            system("clear"); 
             flag = 0;
             selectedRow++;
             visited[selectedRow][selectedColumn] = 1;
@@ -229,6 +232,7 @@ void returnWhenFound(int **maze, char** mazeChar, int **visited, int selectedRow
         }else if(isValid(visited, maze, rows, cols, selectedRow - 1, selectedColumn)){
             usleep(delay);
             system("cls");
+            system("clear");
             flag = 0;
             selectedRow--;
             visited[selectedRow][selectedColumn] = 1;
@@ -249,6 +253,7 @@ void returnWhenFound(int **maze, char** mazeChar, int **visited, int selectedRow
         }else if(isValid(visited, maze, rows, cols, selectedRow, selectedColumn + 1)){
             usleep(delay);
             system("cls");
+            system("clear"); 
             flag = 0;
             selectedColumn++;
             visited[selectedRow][selectedColumn] = 1;
@@ -269,6 +274,7 @@ void returnWhenFound(int **maze, char** mazeChar, int **visited, int selectedRow
         }else if(isValid(visited, maze, rows, cols, selectedRow, selectedColumn - 1)){
             usleep(delay);
             system("cls");
+            system("clear"); 
             flag = 0;
             selectedColumn--;
             visited[selectedRow][selectedColumn] = 1;
@@ -289,6 +295,7 @@ void returnWhenFound(int **maze, char** mazeChar, int **visited, int selectedRow
         }else{
             usleep(delay);
             system("cls");
+            system("clear");
             if(flag == 0){
                 points = points - 5;
                 flag = 1;
@@ -362,11 +369,11 @@ int main(){
     endColumn = returnExitMain -> columnss;
     pushStack(stackHead, selectedRow, selectedColumn);
     printf("Cozmeye Baslamak Icin Enter tusuna basiniz, elmalar oyun basladiktan sonra yerlestirilecektir rastgele olarak yerlestirilecektir: \n");
-    getch();
+    scanf("%c", &dummy);
     putApples(mazeChar, maze, returnStructMain -> rowss, returnStructMain -> columnss);
     returnWhenFound(maze, mazeChar, isVisited, selectedRow, selectedColumn, returnStructMain -> rowss, returnStructMain -> columnss, stackHead, stackEnd, endRow, endColumn);
     printf("Cikis icin enter tusuna basiniz: \n");
-    getch();
+    scanf("%c", &dummy);
 
     return 0;
 }
