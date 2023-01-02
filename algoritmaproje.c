@@ -1,46 +1,73 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
-struct color{
-    int deger;
-    struct color* next;
-};
+#define N 6  // size of the game board
+#define NUM_COLORS 6  // number of colors
 
-typedef struct color COLOR;
+// array to store the game board, where board[i][j] represents the color at row i and column j
+char board[N][N];
 
-void printMatrix(int** matrix){
-    for(int i = 0; i < sizeof(matrix) / 4 + 1; i++){
-        for(int j = 0; j < sizeof(matrix) / 4 + !; j++){
-            printf("%d ", matrix[i][j]);
-        }
-        printf("\n");
-    }
+// array to store the colors
+char colors[NUM_COLORS] = {'R', 'B', 'G', 'P', 'Y', 'S'};
+
+// function to shift the elements of an array to the right by one position
+void shift_right(char *arr, int size) {
+  char temp = arr[size-1];
+  for (int i = size-1; i > 0; i--) {
+    arr[i] = arr[i-1];
+  }
+  arr[0] = temp;
 }
 
-int** getMatrix(){
-    int n, i, j;
-    printf("Please Enter the n of the matrix: ");
-    scanf("%d", &n);
-    int** A = (int**)malloc(sizeof(int*) * n);
-    for(i = 0; i < n; i++){
-        A[i] = (int*)malloc(sizeof(int) * n);
+// recursive function to arrange the colors on the game board
+void arrange_colors(int row) {
+  // base case: if we have reached the last row, we are done
+  if (row == N) {
+    // print the final arrangement of the colors on the game board
+    for (int i = 0; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        printf("%c ", board[i][j]);
+      }
+      printf("\n");
     }
-    printf("White --> 1\nRed --> 2\nGreen --> 3\nBlue --> 4\nPurple --> 5\nPink --> 6\nBlack --> 7\nBrown --> 8\n\n");
-    for(i = 0; i < n; i++){
-        for(j = 0; j < n; j++){
-            printf("Please enter the color to the %dx%d element of the matrix: ");
-            scanf("%d", &A[i][j]);
+    // exit the program
+    exit(0);
+  }
+
+  // try all possible arrangements of colors for the current row
+  for (int i = 0; i < NUM_COLORS; i++) {
+    // copy the colors array to the current row of the game board
+    for (int j = 0; j < N; j++) {
+      board[row][j] = colors[j];
+    }
+
+    // check if the current arrangement is valid (i.e., each column contains exactly one instance of each color)
+    int valid = 1;
+    for (int j = 0; j < N; j++) {
+      for (int k = 0; k < N; k++) {
+        if (board[k][j] != colors[j]) {
+          valid = 0;
+          break;
         }
+      }
+      if (!valid) {
+        break;
+      }
     }
-    return A;
+
+    // if the current arrangement is valid, move to the next row
+    if (valid) {
+      arrange_colors(row+1);
+    }
+
+    // if the current arrangement is not valid, shift the colors in the current row to the right by one position and try again
+    shift_right(colors, N);
+  }
 }
 
-int main(){
-
-    int** A;
-
-    A = getMatrix();
-    printMatrix(A);
-
-    return 0;
+int main() {
+  // start arranging the colors on the game board from the first row
+  arrange_colors(0);
+  return 0;
 }
