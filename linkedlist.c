@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct{
+struct node{
     int value;
     int* next;
-}node_t;
+};
+
+typedef struct node node_t; 
 
 void printlist(node_t *head){
     node_t *temporary = head;
@@ -30,7 +32,7 @@ node_t *insert_at_head(node_t *head, node_t *node_to_insert){
 int main(){
 
     node_t *head = NULL;
-    node_t *tmp;
+    node_t *tmp; 
 
     for(int i = 0; i < 25; i++){
         tmp = create_new_node(8);
