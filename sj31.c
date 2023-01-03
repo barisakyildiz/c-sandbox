@@ -2,17 +2,11 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-struct color{
-    int deger;
-    struct color* next;
-};
-
 struct arraySt{
     int size;
     int** arr;
 };
 
-typedef struct color COLOR;
 typedef struct arraySt ARRAYST;
 
 void printMatrix(int** matrix, int n){
@@ -57,7 +51,7 @@ int swapColors(int row, int** board, int size, int backflag){
             }
         }
         if(flag == 1 && row + 1 < size){
-            swapColors(row + 1, board, size, backflag);
+            backflag = swapColors(row + 1, board, size, backflag);
         }else if(flag == 0){
             printf("FLAG DEBUG");
             for(i = 0; i < size - 1; i++){
@@ -73,11 +67,12 @@ int swapColors(int row, int** board, int size, int backflag){
                     break;
                 }
             }
+            swapColors(row + 1, board, size, backflag);
             count++;
             flag = 1;
         }
     }else{
-        return 1;
+        return 0;
     }
 }
 
